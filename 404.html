@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="color-scheme" content="light dark" />
+        <title>404 - Page Not Found | The Dozens</title>
+
+        <!-- API Configuration -->
+        <meta name="api-base-url" content="http://localhost:8000">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
+
+        <!-- Preload critical fonts -->
+        <link rel="preload" href="./fonts/caloriesuit.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="./fonts/JuliusSansOne-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+        <!-- Preconnect to external resources -->
+        <link rel="preconnect" href="https://ajax.googleapis.com">
+        <link rel="preconnect" href="https://cdn.jsdelivr.net">
+        <link rel="preconnect" href="https://kit.fontawesome.com">
+
+        <!-- Critical CSS (inline to prevent render blocking) -->
+        <style>
+            /* Critical above-the-fold styles only */
+            :root {
+                --color-primary: #770071;
+                --color-secondary: #bd00b4;
+                --color-accent: #beda00;
+                --color-white: #ffffff;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                background: #D7DF0D;
+                font-family: "YoMamaBody", Arial, sans-serif;
+                min-height: 100vh;
+                line-height: 1.6;
+            }
+        </style>
+
+        <!-- External CSS -->
+        <link rel="stylesheet"
+              href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+              integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.4/dist/css/uikit.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+        <link rel="stylesheet" href="./css/styles.css">
+
+        <!-- External JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+                crossorigin="anonymous" defer></script>
+        <script src="https://kit.fontawesome.com/58e27c88da.js" crossorigin="anonymous" defer></script>
+    </head>
+    <body>
+        <div class="layout-container">
+            <div class="content-wrapper show">
+                <div class="responsive-wrapper">
+                    <header role="banner">
+                        <nav class="navbar navbar-expand-lg navbar-dark yo-nav" role="navigation" aria-label="Main">
+                            <div class="container-fluid">
+                                <a href="/" class="navbar-brand d-flex align-items-center gap-2 text-decoration-none">
+                                    <img id="jod-icon" alt="joke_of_day_icon" class="icon-joke-of-day img-fluid"
+                                         src="./assets/icon-jod.png" />
+                                </a>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false"
+                                        aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div id="mainNav" class="collapse navbar-collapse">
+                                    <ul class="navbar-nav ms-auto d-flex align-items-center text-center">
+                                        <li class="nav-item">
+                                            <a class="nav-link nav-underline" href="/">
+                                                <span class="d-none d-md-inline">Back to<br>Home</span>
+                                                <span class="d-md-none">Home</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link nav-underline" href="https://www.brooksjr.com"
+                                               target="_blank" rel="noopener">
+                                                <span class="d-none d-md-inline">About<br>the<br>Developer</span>
+                                                <span class="d-md-none">About Developer</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
+                    </header>
+
+                    <main>
+                        <section id="error-content">
+                            <div class="container-fluid">
+                                <div class="row justify-content-center" id="error-header-row">
+                                    <div class="col-12 col-lg-8 col-xl-6 text-center">
+                                        <div class="error-number">404</div>
+                                        <h1 class="error-title">Page Not Found!</h1>
+                                        <div class="error-subtitle">Yo momma is so lost, she can't even find this page!</div>
+                                    </div>
+                                </div>
+
+                                <div class="row justify-content-center" id="error-body">
+                                    <div class="col-12 col-lg-8 col-xl-6">
+                                        <div class="error-message bg-silver">
+                                            <div class="card-body text-center">
+                                                <h3 class="card-title">Oops! Looks like you've wandered off...</h3>
+                                                <p class="card-text text-responsive">
+                                                    The page you're looking for doesn't exist. Maybe it got roasted so hard it disappeared!
+                                                </p>
+                                                <p class="card-text text-responsive">
+                                                    Don't worry though - our jokes are still here to cheer you up.
+                                                </p>
+
+                                                <div class="error-actions mt-4">
+                                                    <a href="/" class="btn btn-accent header-font me-3 mb-2">
+                                                        <i class="fa fa-home"></i> Go Home
+                                                    </a>
+                                                    <button id="random-joke-btn" class="btn btn-outline-primary header-font mb-2">
+                                                        <i class="fa fa-laugh"></i> Get a Random Joke
+                                                    </button>
+                                                </div>
+
+                                                <div id="joke-display" class="joke-of-day mt-4" style="display: none;">
+                                                    <h5 class="joke-title">Random Yo Mama Joke</h5>
+                                                    <p id="joke-content" class="scale-font"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row justify-content-center mt-4">
+                                    <div class="col-12 col-lg-8 col-xl-6 text-center">
+                                        <div class="helpful-links">
+                                            <h4>Maybe you were looking for:</h4>
+                                            <ul class="list-unstyled">
+                                                <li><a href="/" class="nav-link nav-underline d-inline">🏠 Homepage</a></li>
+                                                <li><a href="http://localhost:8000/api/schema/swagger-ui/" target="_blank" class="nav-link nav-underline d-inline">📚 API Documentation</a></li>
+                                                <li><a href="https://www.postman.com/terryabrooksjr/the-roast-api-yo-mama-jokes/overview" target="_blank" class="nav-link nav-underline d-inline">🚀 Postman Collection</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </main>
+                </div>
+            </div>
+        </div>
+
+        <!-- Custom Scripts -->
+        <script>
+            // Get API URL from meta tag
+            const apiUrl = document.querySelector('meta[name="api-base-url"]')?.content || 'http://localhost:8000';
+            const randomJokeUrl = `${apiUrl}/api/insult/random`;
+
+            // Random joke functionality
+            document.getElementById('random-joke-btn')?.addEventListener('click', async function() {
+                const jokeDisplay = document.getElementById('joke-display');
+                const jokeContent = document.getElementById('joke-content');
+                const button = this;
+
+                button.disabled = true;
+                button.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Loading...';
+
+                try {
+                    const response = await fetch(randomJokeUrl);
+                    if (!response.ok) throw new Error('Failed to fetch joke');
+
+                    const data = await response.json();
+                    const joke = data.content || Object.values(data)[0] || "Yo momma is so fat that when she walked past the TV, I missed three episodes.";
+
+                    jokeContent.textContent = joke;
+                    jokeDisplay.style.display = 'block';
+                    jokeDisplay.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                } catch (error) {
+                    console.error('Error fetching joke:', error);
+                    jokeContent.textContent = "Yo momma is so fat that when she walked past the TV, I missed three episodes.";
+                    jokeDisplay.style.display = 'block';
+                }
+
+                button.disabled = false;
+                button.innerHTML = '<i class="fa fa-laugh"></i> Get Another Joke';
+            });
+
+            // Add some hover effects for desktop
+            if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+                document.querySelectorAll('h1, h2, h3, h4')?.forEach(heading => {
+                    heading.addEventListener('mouseenter', function() {
+                        this.style.textShadow = '-1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff';
+                        this.style.color = '#770071';
+                    });
+
+                    heading.addEventListener('mouseleave', function() {
+                        this.style.textShadow = '';
+                        this.style.color = '';
+                    });
+                });
+            }
+        </script>
+
+        <style>
+            .error-number {
+                font-family: 'YoMamaHeader', Arial, sans-serif;
+                font-size: clamp(4rem, 15vw, 12rem);
+                font-weight: 800;
+                color: var(--color-primary);
+                text-shadow: 4px 4px 0 var(--color-accent);
+                margin-bottom: 0;
+            }
+
+            .error-title {
+                font-family: 'YoMamaHeader', Arial, sans-serif;
+                color: var(--color-secondary);
+                margin: var(--spacing-md) 0;
+            }
+
+            .error-subtitle {
+                font-family: 'YoMamaBody', Arial, sans-serif;
+                font-size: var(--font-size-lg);
+                color: var(--color-primary);
+                font-weight: 600;
+                margin-bottom: var(--spacing-xl);
+            }
+
+            .error-message {
+                border-radius: var(--radius-lg);
+                margin-top: var(--spacing-xl);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            }
+
+            .error-actions .btn {
+                min-width: 150px;
+                font-weight: 700;
+            }
+
+            .helpful-links h4 {
+                color: var(--color-primary);
+                margin-bottom: var(--spacing-lg);
+            }
+
+            .helpful-links ul li {
+                margin-bottom: var(--spacing-sm);
+            }
+
+            .helpful-links a {
+                font-size: var(--font-size-lg);
+                font-weight: 600;
+            }
+
+            #error-content {
+                padding: var(--spacing-xl) var(--spacing-md);
+                min-height: calc(100vh - 200px);
+                display: flex;
+                align-items: center;
+            }
+
+            @media (max-width: 768px) {
+                .error-number {
+                    font-size: clamp(3rem, 20vw, 8rem);
+                }
+
+                #error-content {
+                    padding: var(--spacing-lg) var(--spacing-md);
+                }
+            }
+        </style>
+    </body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "name": "the-dozens-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for The Dozens - Yo Mama Jokes API",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve . -p 3000",
+    "build": "npm run minify-js && npm run minify-css",
+    "minify-js": "npx terser js/*.js -o js/scripts.min.js --source-map",
+    "minify-css": "npx clean-css-cli css/*.css -o css/styles.min.css",
+    "preview": "npm run build && npm run dev"
+  },
+  "keywords": ["api", "jokes", "yo-mama", "humor", "frontend"],
+  "author": "Terry Brooks",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.1",
+    "terser": "^5.24.0",
+    "clean-css-cli": "^5.6.2"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}

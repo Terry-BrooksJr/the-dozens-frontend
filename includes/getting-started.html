@@ -1,0 +1,89 @@
+<!--Start Getting Started Modal-->
+<div class="modal fade" id="getting-started-modal" tabindex="-1" role="dialog"
+     aria-labelledby="getting-started-modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="gettingStartedModalHeader">Getting Started With The Yo' Momma Jokes API</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="ease-of-use-text">
+                    Our Yo Mama Jokes API is designed with developers in mind, offering an intuitive and straightforward interface. With well-documented endpoints and clear error messages, you'll be able to integrate our API into your applications seamlessly. Whether you're new to API consumption or a seasoned developer, you'll find our endpoints easy to navigate and implement.
+                </p>
+                <p id="request-capability-text">
+                    You can make simple HTTP requests to retrieve jokes, with filters for categories and content preferences. Rate limiting ensures the API remains responsive, allowing you to focus on delivering a great user experience without worrying about backend performance.
+                </p>
+
+                <h2 class="example-request-header">Step 1: Create Account</h2>
+                <sub><em>Creating a User is required if you plan on contributing to the API. Just looking to laugh, skip to step 2</em></sub>
+
+                <h3>Endpoint:</h3>
+                <code>POST /auth/users/</code>
+
+                <h3>Request Body:</h3>
+                <pre><code>{
+  "email": "user@example.com",
+  "username": "dozens_lover",
+  "password": "securePassword123"
+}</code></pre>
+
+                <h3>Expected Response:</h3>
+                <pre><code>{
+  "id": 12,
+  "username": "dozens_lover",
+  "email": "user@example.com"
+}</code></pre>
+
+                <h2 class="example-request-header">Step 2: Get Random Joke</h2>
+
+                <h3>Endpoint:</h3>
+                <code>GET /api/insults/random/</code>
+
+                <h3>Headers:</h3>
+                <pre><code>Content-Type: application/json</code></pre>
+
+                <h3>Optional Query Parameters:</h3>
+                <pre><code>?category=P&nsfw=false</code></pre>
+
+                <h3>Response:</h3>
+                <pre><code>{
+  "reference_id": "GIGGLE_ABC123",
+  "content": "Yo mama is so poor, she can't even afford to pay attention.",
+  "category": "Poor",
+  "nsfw": false,
+  "added_by": "John D.",
+  "added_on": "2 days ago"
+}</code></pre>
+
+                <p id="additional-notes-text">
+                    In this example, you can specify the joke category and whether NSFW content is allowed. If no filters are provided, a random joke will be returned. Check out our comprehensive documentation for all available endpoints and parameters.
+                </p>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a href="http://localhost:8000/api/schema/swagger-ui/"
+                   class="btn btn-success" target="_blank">Check Out More In Swagger</a>
+                <a href="https://www.postman.com/terryabrooksjr/the-roast-api-yo-mama-jokes/overview"
+                   class="btn btn-success" target="_blank">Check Out More In Postman</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Initialize the modal trigger
+    const modalTrigger = document.getElementById("getting-started-modal-btn");
+    const modal = document.getElementById("getting-started-modal");
+
+    if (modalTrigger && modal) {
+        modalTrigger.addEventListener("click", function(e) {
+            e.preventDefault();
+            const bootstrapModal = new bootstrap.Modal(modal);
+            bootstrapModal.show();
+        });
+    }
+});
+</script>
+<!--End Getting Started Modal-->

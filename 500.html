@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="color-scheme" content="light dark" />
+        <title>500 - Internal Server Error | The Dozens</title>
+
+        <!-- API Configuration -->
+        <meta name="api-base-url" content="http://localhost:8000">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
+
+        <!-- Preload critical fonts -->
+        <link rel="preload" href="./fonts/caloriesuit.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="./fonts/JuliusSansOne-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+        <!-- Preconnect to external resources -->
+        <link rel="preconnect" href="https://ajax.googleapis.com">
+        <link rel="preconnect" href="https://cdn.jsdelivr.net">
+        <link rel="preconnect" href="https://kit.fontawesome.com">
+
+        <!-- Critical CSS (inline to prevent render blocking) -->
+        <style>
+            /* Critical above-the-fold styles only */
+            :root {
+                --color-primary: #770071;
+                --color-secondary: #bd00b4;
+                --color-accent: #beda00;
+                --color-white: #ffffff;
+                --color-error: #dc3545;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                background: #D7DF0D;
+                font-family: "YoMamaBody", Arial, sans-serif;
+                min-height: 100vh;
+                line-height: 1.6;
+            }
+        </style>
+
+        <!-- External CSS -->
+        <link rel="stylesheet"
+              href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+              integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.17.4/dist/css/uikit.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+        <link rel="stylesheet" href="./css/styles.css">
+
+        <!-- External JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+                crossorigin="anonymous" defer></script>
+        <script src="https://kit.fontawesome.com/58e27c88da.js" crossorigin="anonymous" defer></script>
+    </head>
+    <body>
+        <div class="layout-container">
+            <div class="content-wrapper show">
+                <div class="responsive-wrapper">
+                    <header role="banner">
+                        <nav class="navbar navbar-expand-lg navbar-dark yo-nav" role="navigation" aria-label="Main">
+                            <div class="container-fluid">
+                                <a href="/" class="navbar-brand d-flex align-items-center gap-2 text-decoration-none">
+                                    <img id="jod-icon" alt="joke_of_day_icon" class="icon-joke-of-day img-fluid"
+                                         src="./assets/icon-jod.png" />
+                                </a>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false"
+                                        aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div id="mainNav" class="collapse navbar-collapse">
+                                    <ul class="navbar-nav ms-auto d-flex align-items-center text-center">
+                                        <li class="nav-item">
+                                            <a class="nav-link nav-underline" href="/">
+                                                <span class="d-none d-md-inline">Back to<br>Home</span>
+                                                <span class="d-md-none">Home</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link nav-underline" href="https://www.brooksjr.com"
+                                               target="_blank" rel="noopener">
+                                                <span class="d-none d-md-inline">About<br>the<br>Developer</span>
+                                                <span class="d-md-none">About Developer</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
+                    </header>
+
+                    <main>
+                        <section id="error-content">
+                            <div class="container-fluid">
+                                <div class="row justify-content-center" id="error-header-row">
+                                    <div class="col-12 col-lg-8 col-xl-6 text-center">
+                                        <div class="error-number">500</div>
+                                        <h1 class="error-title">Server Error!</h1>
+                                        <div class="error-subtitle">Yo momma crashed the server just by looking at it!</div>
+                                    </div>
+                                </div>
+
+                                <div class="row justify-content-center" id="error-body">
+                                    <div class="col-12 col-lg-8 col-xl-6">
+                                        <div class="error-message bg-silver">
+                                            <div class="card-body text-center">
+                                                <h3 class="card-title">Something went wrong on our end...</h3>
+                                                <p class="card-text text-responsive">
+                                                    Our server is having some issues right now. Don't worry, it's not you - it's us!
+                                                </p>
+                                                <p class="card-text text-responsive">
+                                                    We're working on fixing this faster than yo momma can eat a donut.
+                                                </p>
+
+                                                <div class="error-actions mt-4">
+                                                    <a href="/" class="btn btn-accent header-font me-3 mb-2">
+                                                        <i class="fa fa-home"></i> Go Home
+                                                    </a>
+                                                    <button id="retry-btn" class="btn btn-outline-primary header-font me-3 mb-2" onclick="window.location.reload()">
+                                                        <i class="fa fa-refresh"></i> Try Again
+                                                    </button>
+                                                    <button id="fallback-joke-btn" class="btn btn-outline-secondary header-font mb-2">
+                                                        <i class="fa fa-laugh"></i> Emergency Joke
+                                                    </button>
+                                                </div>
+
+                                                <div id="joke-display" class="joke-of-day mt-4" style="display: none;">
+                                                    <h5 class="joke-title">Emergency Backup Joke</h5>
+                                                    <p id="joke-content" class="scale-font"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row justify-content-center mt-4">
+                                    <div class="col-12 col-lg-8 col-xl-6">
+                                        <div class="troubleshooting bg-silver">
+                                            <div class="card-body">
+                                                <h4 class="card-title text-center">Troubleshooting Tips</h4>
+                                                <ul class="troubleshooting-list">
+                                                    <li><strong>Wait a moment:</strong> The issue might resolve itself in a few minutes</li>
+                                                    <li><strong>Refresh the page:</strong> Sometimes a simple refresh does the trick</li>
+                                                    <li><strong>Check your connection:</strong> Make sure you're connected to the internet</li>
+                                                    <li><strong>Try later:</strong> If nothing works, come back in a bit - we'll be here!</li>
+                                                </ul>
+                                                <div class="text-center mt-3">
+                                                    <small class="text-muted">
+                                                        If this problem persists, contact the developer at
+                                                        <a href="https://www.brooksjr.com" target="_blank" class="text-decoration-none">brooksjr.com</a>
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </main>
+                </div>
+            </div>
+        </div>
+
+        <!-- Custom Scripts -->
+        <script>
+            // Emergency joke functionality with fallback jokes
+            const emergencyJokes = [
+                "Yo momma is so fat that when she walked past the TV, I missed three episodes.",
+                "Yo momma is so old, she knew Burger King when he was still a prince.",
+                "Yo momma is so poor, the ducks throw bread at her.",
+                "Yo momma is so short, she has to use a ladder to pick up a dime.",
+                "Yo momma is so ugly, when she threw a boomerang it wouldn't even come back.",
+                "Yo momma is so lazy, she thinks a two-income family is where yo daddy has two jobs.",
+                "Yo momma is so stupid, she put lipstick on her head just to make-up her mind.",
+                "Yo momma is so fat, when she wears a yellow raincoat, people yell 'Taxi!'",
+                "Yo momma is so old, her birth certificate says 'expired' on it.",
+                "Yo momma is so poor, when I saw her kicking a can down the street, I asked what she was doing, she said 'Moving.'"
+            ];
+
+            document.getElementById('fallback-joke-btn')?.addEventListener('click', function() {
+                const jokeDisplay = document.getElementById('joke-display');
+                const jokeContent = document.getElementById('joke-content');
+                const button = this;
+
+                // Get random joke from emergency collection
+                const randomIndex = Math.floor(Math.random() * emergencyJokes.length);
+                const joke = emergencyJokes[randomIndex];
+
+                jokeContent.textContent = joke;
+                jokeDisplay.style.display = 'block';
+                jokeDisplay.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+                // Change button text after first use
+                button.innerHTML = '<i class="fa fa-laugh"></i> Another Emergency Joke';
+            });
+
+            // Add some hover effects for desktop
+            if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+                document.querySelectorAll('h1, h2, h3, h4')?.forEach(heading => {
+                    heading.addEventListener('mouseenter', function() {
+                        this.style.textShadow = '-1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff';
+                        this.style.color = '#770071';
+                    });
+
+                    heading.addEventListener('mouseleave', function() {
+                        this.style.textShadow = '';
+                        this.style.color = '';
+                    });
+                });
+            }
+
+            // Auto-refresh functionality (optional - commented out)
+            // setTimeout(() => {
+            //     if (confirm('Would you like to try refreshing the page automatically?')) {
+            //         window.location.reload();
+            //     }
+            // }, 30000); // Ask after 30 seconds
+        </script>
+
+        <style>
+            .error-number {
+                font-family: 'YoMamaHeader', Arial, sans-serif;
+                font-size: clamp(4rem, 15vw, 12rem);
+                font-weight: 800;
+                color: var(--color-error);
+                text-shadow: 4px 4px 0 var(--color-accent);
+                margin-bottom: 0;
+            }
+
+            .error-title {
+                font-family: 'YoMamaHeader', Arial, sans-serif;
+                color: var(--color-primary);
+                margin: var(--spacing-md) 0;
+            }
+
+            .error-subtitle {
+                font-family: 'YoMamaBody', Arial, sans-serif;
+                font-size: var(--font-size-lg);
+                color: var(--color-secondary);
+                font-weight: 600;
+                margin-bottom: var(--spacing-xl);
+            }
+
+            .error-message, .troubleshooting {
+                border-radius: var(--radius-lg);
+                margin-top: var(--spacing-xl);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            }
+
+            .error-actions .btn {
+                min-width: 140px;
+                font-weight: 700;
+            }
+
+            .troubleshooting-list {
+                text-align: left;
+                margin: var(--spacing-lg) 0;
+            }
+
+            .troubleshooting-list li {
+                margin-bottom: var(--spacing-sm);
+                font-size: var(--font-size-base);
+            }
+
+            .troubleshooting-list strong {
+                color: var(--color-primary);
+            }
+
+            #error-content {
+                padding: var(--spacing-xl) var(--spacing-md);
+                min-height: calc(100vh - 200px);
+                display: flex;
+                align-items: center;
+            }
+
+            @media (max-width: 768px) {
+                .error-number {
+                    font-size: clamp(3rem, 20vw, 8rem);
+                }
+
+                #error-content {
+                    padding: var(--spacing-lg) var(--spacing-md);
+                }
+
+                .error-actions .btn {
+                    min-width: 120px;
+                    margin-bottom: var(--spacing-sm);
+                }
+            }
+        </style>
+    </body>
+</html>

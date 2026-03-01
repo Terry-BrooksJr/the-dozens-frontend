@@ -94,7 +94,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    loadComponentsSequentially();
+    loadComponentsSequentially().then(() => {
+        // Notify scripts.js (and any other listeners) that all modal partials
+        // have been injected into the DOM and are safe to query/initialize.
+        document.dispatchEvent(new CustomEvent('allModalsLoaded'));
+        console.log('[ComponentLoader] All modal partials loaded — allModalsLoaded dispatched');
+    });
 });
 
 // Export for global use

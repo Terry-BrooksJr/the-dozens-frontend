@@ -763,13 +763,13 @@ class UIController {
       const nextModalEl = document.querySelector(nextModalId);
       if (!nextModalEl) return;
 
-      const currentBsModal = bootstrap.Modal.getInstance(currentModal);
-      if (currentBsModal) {
-        currentModal.addEventListener('hidden.bs.modal', () => {
-          const nextBsModal = new bootstrap.Modal(nextModalEl);
-          nextBsModal.show();
-        }, { once: true });
-      }
+      // Use getOrCreateInstance so this works even when the modal was opened
+      // outside the standard Bootstrap JS path (e.g. via a direct show() call).
+      const currentBsModal = bootstrap.Modal.getOrCreateInstance(currentModal);
+      currentModal.addEventListener('hidden.bs.modal', () => {
+        bootstrap.Modal.getOrCreateInstance(nextModalEl).show();
+      }, { once: true });
+      currentBsModal.hide();
     });
   }
 }
@@ -959,6 +959,124 @@ class HeadingLetterBounce {
 }
 
 // =============================================================================
+// Getting Started Modal Wizard
+// =============================================================================
+
+/**
+ * Manages the 4-step "Getting Started" modal tab wizard.
+ * Initialized after all modal partials have been injected into the DOM
+ * (see the 'allModalsLoaded' event dispatched by component-loader.js).
+ */
+class GettingStartedModal {
+  static TABS = [
+    'gs-overview-tab',
+    'gs-account-tab',
+    'gs-jokes-tab',
+    'gs-reference-tab',
+  ];
+
+  /**
+   * Returns the index of the currently active tab (-1 if none found).
+   * @returns {number}
+   */
+  static currentIndex() {
+    return this.TABS.findIndex((id) => {
+      const el = document.getElementById(id);
+      return el && el.classList.contains('active');
+    });
+  }
+
+  /**
+   * Shows the tab at the given index using Bootstrap's Tab API.
+   * @param {number} index
+   */
+  static goToTab(index) {
+    const tab = document.getElementById(this.TABS[index]);
+    if (tab) {
+      bootstrap.Tab.getOrCreateInstance(tab).show();
+    }
+  }
+
+  /**
+   * Keeps Prev/Next button states in sync with the active tab.
+   * On the last tab the Next button becomes a "Done" dismiss trigger.
+   * @param {number} index
+   */
+  static updateButtons(index) {
+    const prevBtn = document.getElementById('gs-prev-btn');
+    const nextBtn = document.getElementById('gs-next-btn');
+    if (!prevBtn || !nextBtn) return;
+
+    prevBtn.disabled = index === 0;
+
+    if (index === this.TABS.length - 1) {
+      nextBtn.innerHTML = '<i class="fa-solid fa-check me-1"></i> Done';
+      nextBtn.setAttribute('data-bs-dismiss', 'modal');
+    } else {
+      nextBtn.innerHTML = 'Next <i class="fa-solid fa-forward ms-1"></i>';
+      nextBtn.removeAttribute('data-bs-dismiss');
+    }
+  }
+
+  /**
+   * Wires up all event listeners for the modal wizard.
+   * Called once after the partial has been injected into the DOM.
+   */
+  static initialize() {
+    const modalEl = document.getElementById('getting-started-modal');
+    const modalTrigger = document.getElementById('getting-started-modal-btn');
+    const prevBtn = document.getElementById('gs-prev-btn');
+    const nextBtn = document.getElementById('gs-next-btn');
+
+    if (!modalEl) {
+      console.warn('[GettingStartedModal] Modal element not found – skipping init');
+      return;
+    }
+
+    // Nav-button trigger: reset wizard to tab 1 on open
+    if (modalTrigger) {
+      modalTrigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.goToTab(0);
+        this.updateButtons(0);
+        bootstrap.Modal.getOrCreateInstance(modalEl).show();
+      });
+    }
+
+    // Prev button
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        const idx = this.currentIndex();
+        if (idx > 0) this.goToTab(idx - 1);
+      });
+    }
+
+    // Next button
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        const idx = this.currentIndex();
+        if (idx < this.TABS.length - 1) this.goToTab(idx + 1);
+      });
+    }
+
+    // Keep buttons in sync whenever Bootstrap changes the active tab
+    this.TABS.forEach((id) => {
+      const tabEl = document.getElementById(id);
+      if (tabEl) {
+        tabEl.addEventListener('shown.bs.tab', () => {
+          this.updateButtons(this.currentIndex());
+        });
+      }
+    });
+
+    // Set initial button state
+    this.updateButtons(0);
+
+    console.log('[GettingStartedModal] Initialized');
+  }
+}
+
+// =============================================================================
 // Monitoring Auto-Switcher
 // =============================================================================
 
@@ -1108,6 +1226,13 @@ function initializeApp() {
     if (e.target?.id === 'monitoring-tab') {
       monitoringSwitcher.stop();
     }
+  });
+
+  // Initialize modal-partial features once component-loader has finished
+  // injecting all partials into #modals-container.
+  document.addEventListener('allModalsLoaded', () => {
+    GettingStartedModal.initialize();
+    console.log('[TheDozens] Modal partials initialized');
   });
 
   // Auto-stop preloader after delay

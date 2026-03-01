@@ -172,8 +172,11 @@
                 button.disabled = true;
                 button.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Loading...';
 
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 5000);
+
                 try {
-                    const response = await fetch(randomJokeUrl);
+                    const response = await fetch(randomJokeUrl, { signal: controller.signal });
                     if (!response.ok) throw new Error('Failed to fetch joke');
 
                     const data = await response.json();
@@ -186,6 +189,8 @@
                     console.error('Error fetching joke:', error);
                     jokeContent.textContent = "Yo momma is so fat that when she walked past the TV, I missed three episodes.";
                     jokeDisplay.style.display = 'block';
+                } finally {
+                    clearTimeout(timeoutId);
                 }
 
                 button.disabled = false;

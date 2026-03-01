@@ -14,11 +14,18 @@ HTDOCS="/usr/local/apache2/htdocs"
 DEFAULT_URL="http://localhost:8000"
 
 # ---------------------------------------------------------------------------
-# Escape the API_BASE_URL for safe use in a sed replacement string.
-# We use '@' as the sed delimiter to avoid escaping '/' in URLs.
-# We still must escape '&' and '\' which are special in sed replacements.
+# Fail fast if API_BASE_URL is unset or empty.
+# The Dockerfile sets a default, but an explicit -e API_BASE_URL= at
+# container run-time would override it with an empty string.
 # ---------------------------------------------------------------------------
-ESCAPED_URL=$(printf '%s\n' "${API_BASE_URL}" | sed 's/[&\]/\\&/g')
+: "${API_BASE_URL:?Error: API_BASE_URL is not set or empty}"
+
+# ---------------------------------------------------------------------------
+# Escape the API_BASE_URL for safe use in a sed replacement string.
+# We use '@' as the sed delimiter to avoid escaping '/' in URLs, so we
+# must also escape '@' in the value in addition to '&' and '\'.
+# ---------------------------------------------------------------------------
+ESCAPED_URL=$(printf '%s\n' "${API_BASE_URL}" | sed 's/[&\@]/\\&/g')
 
 echo "==> Injecting API_BASE_URL: ${API_BASE_URL}"
 

@@ -441,13 +441,13 @@ p {
   border-bottom: none;
 }
 
-/* Desktop: horizontal layout */
+/* Desktop: horizontal layout — anchor right edge to prevent viewport overflow */
 @media (min-width: 577px) {
   .dropdown-menu-horizontal.show {
     flex-direction: row;
     min-width: 280px;
-    right:auto;
-    left:0;
+    right: 0;
+    left: auto;
   }
 
   .dropdown-menu-horizontal > li {
@@ -574,10 +574,17 @@ object {
   }
 }
 
+#video {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 #about-video {
   max-width: 100%;
   width: 100%;
   height: auto;
+  display: block;
 }
 
 @media (min-width: 768px) {
@@ -657,12 +664,31 @@ object {
 /* ==========================================================================
    13. Interactive Elements (Mobile-First)
    ========================================================================== */
+
+/* JOD attention pulse — runs until the user first clicks the icon */
+@keyframes jod-attention-pulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 3px rgba(190, 218, 0, 0.45));
+  }
+  50% {
+    transform: scale(1.12);
+    filter: drop-shadow(0 0 18px rgba(189, 0, 180, 0.95));
+  }
+}
+
 .icon-joke-of-day {
   transition: all var(--transition-standard);
   cursor: pointer;
   height: auto;
   width: auto;
   max-height: 80px;
+  animation: jod-attention-pulse 2.2s ease-in-out infinite;
+}
+
+/* Stop animation once the user has interacted */
+.icon-joke-of-day.interacted {
+  animation: none;
 }
 
 @media (min-width: 577px) {
@@ -671,9 +697,10 @@ object {
   }
 }
 
-/* Desktop: hover effects */
+/* Desktop: hover effects — also pause the pulse so hover wins */
 @media (hover: hover) and (pointer: fine) {
   .icon-joke-of-day:hover {
+    animation-play-state: paused;
     transform: scale(1.05);
     filter: drop-shadow(0 0 10px rgba(189, 0, 180, 0.6));
   }
@@ -684,6 +711,34 @@ object {
   .icon-joke-of-day:active {
     transform: scale(0.95);
   }
+}
+
+/* Hint label below the icon */
+.jod-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.jod-hint {
+  font-family: 'YoMamaBody', Arial, sans-serif;
+  font-size: 0.58rem;
+  color: var(--color-accent);
+  text-align: center;
+  white-space: nowrap;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 700;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  margin-top: 3px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.jod-hint.hidden {
+  opacity: 0;
 }
 
 /* ==========================================================================
@@ -714,7 +769,17 @@ a:focus-visible {
 /* ==========================================================================
    15. Accordion (Mobile-First)
    ========================================================================== */
+
+/* Undo global h1–h6 margin/font that breaks Bootstrap accordion layout.
+   The .accordion-header <h2> must have margin:0 for the button to sit flush,
+   and should use the body font so text doesn't overflow its container. */
+.accordion-header {
+  margin-bottom: 0;
+  font-family: 'YoMamaBody', Arial, sans-serif;
+}
+
 .accordion-button {
+  font-family: 'YoMamaBody', Arial, sans-serif;
   font-size: var(--font-size-sm);
   padding: var(--spacing-md);
 }
@@ -797,7 +862,6 @@ a:focus-visible {
   }
 
   #about-video {
-    margin-left: 0 !important;
     margin-top: var(--spacing-md);
   }
 }
@@ -820,7 +884,7 @@ a:focus-visible {
    ========================================================================== */
 /* Hover effects for headers and elements */
 h1:hover,
-h2:hover,
+h2:not(.accordion-header):hover,
 h3:hover,
 h4:hover,
 h6:hover,

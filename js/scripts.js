@@ -456,17 +456,23 @@ class SpeechBubbleController {
   }
 
   /**
-   * Shows the speech bubble
+   * Shows the speech bubble and pauses the attention animation
    */
   showBubble() {
     this.bubbleElement.classList.add('show');
+    this.iconElement.classList.add('interacted');
+    const hint = document.querySelector('.jod-hint');
+    if (hint) hint.classList.add('hidden');
   }
 
   /**
-   * Hides the speech bubble
+   * Hides the speech bubble and resumes the attention animation
    */
   hideBubble() {
     this.bubbleElement.classList.remove('show');
+    this.iconElement.classList.remove('interacted');
+    const hint = document.querySelector('.jod-hint');
+    if (hint) hint.classList.remove('hidden');
   }
 
   /**
@@ -744,6 +750,27 @@ class UIController {
         target.setAttribute('aria-hidden', 'true');
       }
     });
+
+    // Handle sequential modal navigation via data-next-modal attribute
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-next-modal]');
+      if (!btn) return;
+
+      const nextModalId = btn.dataset.nextModal;
+      const currentModal = btn.closest('.modal');
+      if (!currentModal || !nextModalId) return;
+
+      const nextModalEl = document.querySelector(nextModalId);
+      if (!nextModalEl) return;
+
+      const currentBsModal = bootstrap.Modal.getInstance(currentModal);
+      if (currentBsModal) {
+        currentModal.addEventListener('hidden.bs.modal', () => {
+          const nextBsModal = new bootstrap.Modal(nextModalEl);
+          nextBsModal.show();
+        }, { once: true });
+      }
+    });
   }
 }
 
@@ -781,6 +808,10 @@ class HeadingLetterBounce {
     const headings = document.querySelectorAll(this.headingSelectors);
 
     headings.forEach((heading) => {
+      // Skip accordion headers — splitting their innerHTML breaks Bootstrap's
+      // accordion collapse JS and the button structure inside them.
+      if (heading.classList.contains('accordion-header')) return;
+
       // Store original content
       this.originalContent.set(heading, heading.textContent);
 

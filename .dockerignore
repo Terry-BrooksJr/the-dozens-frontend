@@ -1,0 +1,38 @@
+# Node dependency directory - never include in image
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Git history and metadata
+.git/
+.gitignore
+.gitattributes
+
+# Backup files (404.html.bak exists in the repo)
+*.bak
+
+# Docker files themselves
+Dockerfile
+.dockerignore
+docker-compose.yml
+docker-compose*.yml
+
+# Pre-built minified files - builder stage regenerates these from source
+js/scripts.min.js
+js/scripts.min.js.map
+css/styles.min.css
+
+# Documentation
+README.md
+error-pages-readme.md
+
+# macOS filesystem artifacts
+.DS_Store
+**/.DS_Store
+
+# Editor metadata
+.vscode/
+.idea/
+*.swp
+*.swo

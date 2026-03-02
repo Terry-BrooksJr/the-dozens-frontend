@@ -88,8 +88,11 @@
                         <nav class="navbar navbar-expand-lg navbar-dark yo-nav" role="navigation" aria-label="Main">
                             <div class="container-fluid">
                                 <div class="RandomJoke navbar-brand d-flex align-items-center gap-2">
-                                    <img id="jod-icon" alt="joke_of_day_icon" class="icon-joke-of-day img-fluid"
-                                         src="./assets/icon-jod.png" />
+                                    <div class="jod-wrapper">
+                                        <img id="jod-icon" alt="joke_of_day_icon" class="icon-joke-of-day img-fluid"
+                                             src="./assets/icon-jod.png" />
+                                        <span class="jod-hint">click for a joke!</span>
+                                    </div>
                                 </div>
                                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false"
@@ -109,7 +112,7 @@
                                             <a class="nav-link dropdown-toggle nav-underline" href="#"
                                                id="apiMenuToggle" role="button" data-bs-toggle="dropdown"
                                                aria-expanded="false">The API</a>
-                                            <ul id="api-menu" class="dropdown-menu" aria-labelledby="apiMenuToggle">
+                                            <ul id="api-menu" class="dropdown-menu dropdown-menu-end" aria-labelledby="apiMenuToggle">
                                                 <li>
                                                     <a class="dropdown-item" target="_blank" href="http://localhost:8000/api/swagger/">
                                                         <img class="api-nav-img" src="./assets/swagger_icon.png" alt="swagger_logo" />
@@ -177,7 +180,8 @@
                                             </ul>
                                         </li>
                                         <li class="nav-item ms-2">
-                                            <a id="getting-started-modal-btn" class="btn btn-accent header-font">
+                                            <a id="getting-started-modal-btn" class="btn btn-accent header-font"
+                                               role="button" data-bs-toggle="modal" data-bs-target="#getting-started-modal">
                                                 <span class="d-none d-md-inline">Get<br>Started</span>
                                                 <span class="d-md-none">Get Started</span>
                                             </a>
@@ -211,7 +215,7 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="row justify-content-center">
+                                <div class="row justify-content-center align-items-center" id="video-row">
                                     <div class="col-12 col-lg-8" id="video">
                                         <video id="about-video" class="img-fluid w-100"
                                                src="./assets/blackish_the_dozens_abc_broadcasting.mp4" controls>
@@ -299,6 +303,7 @@
 
                                                 <!-- Database Tab -->
                                                 <div class="tab-pane bg-silver card fade" id="database" role="tabpanel" aria-labelledby="database-tab">
+                                                    <img class="card-img-top" src="./assets/PostgresSQL_logo.png" alt="postgres-logo">
                                                     <div class="card-body">
                                                         <h5 class="card-title">Database</h5>
                                                         <p class="card-text">PostgreSQL</p>
@@ -308,6 +313,7 @@
 
                                                 <!-- Monitoring Tab -->
                                                 <div class="tab-pane bg-silver card fade" id="monitoring" role="tabpanel" aria-labelledby="monitoring-tab">
+                                                    
                                                     <div class="card-body">
                                                         <h5 class="card-title">Monitoring & Observability</h5>
                                                         <p class="card-text">Monitoring and observability tools</p>
@@ -317,6 +323,7 @@
 
                                                 <!-- CI/CD Tab -->
                                                 <div class="tab-pane bg-silver card fade" id="ci-cd" role="tabpanel" aria-labelledby="ci-cd-tab">
+                                                        <img class="card-img-top" src="./assets/gh_actions.webp" alt="github-actions-logo">
                                                     <div class="card-body">
                                                         <h5 class="card-title">CI/CD</h5>
                                                         <p class="card-text">Continuous Integration and Deployment</p>

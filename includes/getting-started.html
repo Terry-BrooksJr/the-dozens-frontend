@@ -1,89 +1,404 @@
 <!--Start Getting Started Modal-->
 <div class="modal fade" id="getting-started-modal" tabindex="-1" role="dialog"
-     aria-labelledby="getting-started-modal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+     aria-labelledby="gettingStartedModalHeader" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="gettingStartedModalHeader">Getting Started With The Yo' Momma Jokes API</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+            <!-- Header -->
+            <div class="modal-header gs-modal-header">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="fa-solid fa-rocket gs-header-icon"></i>
+                    <h5 class="modal-title header-font mb-0" id="gettingStartedModalHeader">
+                        Getting Started With The Yo' Momma Jokes API
+                    </h5>
+                </div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <p id="ease-of-use-text">
-                    Our Yo Mama Jokes API is designed with developers in mind, offering an intuitive and straightforward interface. With well-documented endpoints and clear error messages, you'll be able to integrate our API into your applications seamlessly. Whether you're new to API consumption or a seasoned developer, you'll find our endpoints easy to navigate and implement.
-                </p>
-                <p id="request-capability-text">
-                    You can make simple HTTP requests to retrieve jokes, with filters for categories and content preferences. Rate limiting ensures the API remains responsive, allowing you to focus on delivering a great user experience without worrying about backend performance.
-                </p>
 
-                <h2 class="example-request-header">Step 1: Create Account</h2>
-                <sub><em>Creating a User is required if you plan on contributing to the API. Just looking to laugh, skip to step 2</em></sub>
+            <!-- Step Tab Nav -->
+            <div class="gs-step-nav">
+                <ul class="nav nav-pills gs-step-pills" id="gs-tabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link gs-pill active" id="gs-overview-tab"
+                                data-bs-toggle="pill" data-bs-target="#gs-overview"
+                                type="button" role="tab" aria-controls="gs-overview" aria-selected="true">
+                            <span class="gs-step-badge">1</span> Overview
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link gs-pill" id="gs-account-tab"
+                                data-bs-toggle="pill" data-bs-target="#gs-account"
+                                type="button" role="tab" aria-controls="gs-account" aria-selected="false">
+                            <span class="gs-step-badge">2</span> Create Account
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link gs-pill" id="gs-jokes-tab"
+                                data-bs-toggle="pill" data-bs-target="#gs-jokes"
+                                type="button" role="tab" aria-controls="gs-jokes" aria-selected="false">
+                            <span class="gs-step-badge">3</span> Get Jokes
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link gs-pill" id="gs-reference-tab"
+                                data-bs-toggle="pill" data-bs-target="#gs-reference"
+                                type="button" role="tab" aria-controls="gs-reference" aria-selected="false">
+                            <span class="gs-step-badge">4</span> Quick Reference
+                        </button>
+                    </li>
+                </ul>
+            </div>
 
-                <h3>Endpoint:</h3>
-                <code>POST /auth/users/</code>
+            <!-- Tab Content -->
+            <div class="modal-body gs-modal-body">
+                <div class="tab-content" id="gs-tab-content">
 
-                <h3>Request Body:</h3>
-                <pre><code>{
+                    <!-- Tab 1: Overview -->
+                    <div class="tab-pane fade show active" id="gs-overview" role="tabpanel" aria-labelledby="gs-overview-tab">
+                        <div class="gs-callout">
+                            <i class="fa-solid fa-circle-info gs-callout-icon"></i>
+                            <div>
+                                <strong>Developer-friendly by design.</strong>
+                                The Yo' Momma Jokes API offers clean, well-documented endpoints with clear error messages,
+                                generous rate limiting, and dual REST + GraphQL interfaces — so you can get laughing in minutes.
+                            </div>
+                        </div>
+
+                        <h4 class="gs-section-title">What You Can Do</h4>
+                        <div class="row g-3 mb-4">
+                            <div class="col-12 col-md-6">
+                                <div class="gs-feature-card">
+                                    <i class="fa-solid fa-shuffle gs-feature-icon"></i>
+                                    <h6>Random Jokes</h6>
+                                    <p>Fetch a random Yo' Momma joke on demand — no auth required for read access.</p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="gs-feature-card">
+                                    <i class="fa-solid fa-filter gs-feature-icon"></i>
+                                    <h6>Filter by Category & NSFW</h6>
+                                    <p>Narrow results by joke category and explicit content flag to match your audience.</p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="gs-feature-card">
+                                    <i class="fa-brands fa-connectdevelop gs-feature-icon"></i>
+                                    <h6>REST &amp; GraphQL</h6>
+                                    <p>Choose between a traditional REST API or the modern GraphQL interface — same data, your preference.</p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="gs-feature-card">
+                                    <i class="fa-solid fa-plus-circle gs-feature-icon"></i>
+                                    <h6>Contribute Jokes</h6>
+                                    <p>Create an account to submit new jokes and help grow the collection.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4 class="gs-section-title">Base URL</h4>
+                        <div class="gs-endpoint-row">
+                            <span class="gs-method-badge gs-method-get">BASE</span>
+                            <code class="gs-endpoint-code">http://localhost:8000/api/</code>
+                        </div>
+
+                        <div class="gs-tip">
+                            <i class="fa-solid fa-lightbulb"></i>
+                            <span><strong>Just here to read jokes?</strong> Skip ahead to <strong>Step 3: Get Jokes</strong> — no account needed.</span>
+                        </div>
+                    </div>
+
+                    <!-- Tab 2: Create Account -->
+                    <div class="tab-pane fade" id="gs-account" role="tabpanel" aria-labelledby="gs-account-tab">
+                        <div class="gs-step-header-row">
+                            <span class="gs-step-number-lg">2</span>
+                            <div>
+                                <h4 class="mb-1">Create an Account <span class="badge bg-secondary ms-1">Optional</span></h4>
+                                <p class="text-muted mb-0 fs-sm">Required only if you plan to contribute jokes. Just reading? Skip to Step 3.</p>
+                            </div>
+                        </div>
+
+                        <h5 class="gs-section-title mt-4">Register a New User</h5>
+                        <div class="gs-endpoint-row">
+                            <span class="gs-method-badge gs-method-post">POST</span>
+                            <code class="gs-endpoint-code">/auth/users/</code>
+                        </div>
+
+                        <div class="row g-3 mt-2">
+                            <div class="col-12 col-lg-6">
+                                <h6 class="gs-block-label">Request Body</h6>
+                                <pre class="gs-code-block"><code>{
   "email": "user@example.com",
   "username": "dozens_lover",
   "password": "securePassword123"
 }</code></pre>
-
-                <h3>Expected Response:</h3>
-                <pre><code>{
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <h6 class="gs-block-label">
+                                    Response <span class="badge bg-success ms-1">201 Created</span>
+                                </h6>
+                                <pre class="gs-code-block"><code>{
   "id": 12,
   "username": "dozens_lover",
   "email": "user@example.com"
 }</code></pre>
+                            </div>
+                        </div>
 
-                <h2 class="example-request-header">Step 2: Get Random Joke</h2>
+                        <h5 class="gs-section-title mt-4">Obtain an Auth Token</h5>
+                        <p class="text-muted">Use your credentials to get a token for write operations:</p>
+                        <div class="gs-endpoint-row">
+                            <span class="gs-method-badge gs-method-post">POST</span>
+                            <code class="gs-endpoint-code">/auth/token/login/</code>
+                        </div>
 
-                <h3>Endpoint:</h3>
-                <code>GET /api/insults/random/</code>
+                        <div class="row g-3 mt-2">
+                            <div class="col-12 col-lg-6">
+                                <h6 class="gs-block-label">Request Body</h6>
+                                <pre class="gs-code-block"><code>{
+  "username": "dozens_lover",
+  "password": "securePassword123"
+}</code></pre>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <h6 class="gs-block-label">
+                                    Response <span class="badge bg-success ms-1">200 OK</span>
+                                </h6>
+                                <pre class="gs-code-block"><code>{
+  "auth_token": "9944b09199c62bcf..."
+}</code></pre>
+                            </div>
+                        </div>
 
-                <h3>Headers:</h3>
-                <pre><code>Content-Type: application/json</code></pre>
+                        <div class="gs-tip mt-3">
+                            <i class="fa-solid fa-key"></i>
+                            <span>Include your token in the <code>Authorization</code> header as <code>Token 9944b09199c62bcf...</code> for all write requests.</span>
+                        </div>
+                    </div>
 
-                <h3>Optional Query Parameters:</h3>
-                <pre><code>?category=P&nsfw=false</code></pre>
+                    <!-- Tab 3: Get Jokes -->
+                    <div class="tab-pane fade" id="gs-jokes" role="tabpanel" aria-labelledby="gs-jokes-tab">
+                        <div class="gs-step-header-row">
+                            <span class="gs-step-number-lg">3</span>
+                            <div>
+                                <h4 class="mb-1">Fetch Jokes</h4>
+                                <p class="text-muted mb-0 fs-sm">No authentication required for read endpoints.</p>
+                            </div>
+                        </div>
 
-                <h3>Response:</h3>
-                <pre><code>{
+                        <h5 class="gs-section-title mt-4">Get a Random Joke</h5>
+                        <div class="gs-endpoint-row">
+                            <span class="gs-method-badge gs-method-get">GET</span>
+                            <code class="gs-endpoint-code">/api/insults/random/</code>
+                        </div>
+
+                        <h6 class="gs-block-label mt-3">Optional Query Parameters</h6>
+                        <div class="table-responsive mb-3">
+                            <table class="table table-sm gs-param-table">
+                                <thead>
+                                    <tr>
+                                        <th>Parameter</th>
+                                        <th>Type</th>
+                                        <th>Example</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>category</code></td>
+                                        <td>string</td>
+                                        <td><code>P</code></td>
+                                        <td>Filter by joke category (e.g. P = Poor)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>nsfw</code></td>
+                                        <td>boolean</td>
+                                        <td><code>false</code></td>
+                                        <td>Include explicit content (<code>true</code>) or keep it clean (<code>false</code>)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h6 class="gs-block-label">Example Request</h6>
+                        <div class="gs-endpoint-row mb-3">
+                            <span class="gs-method-badge gs-method-get">GET</span>
+                            <code class="gs-endpoint-code">/api/insults/random/?category=P&amp;nsfw=false</code>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-12 col-lg-6">
+                                <h6 class="gs-block-label">
+                                    Response <span class="badge bg-success ms-1">200 OK</span>
+                                </h6>
+                                <pre class="gs-code-block"><code>{
   "reference_id": "GIGGLE_ABC123",
-  "content": "Yo mama is so poor, she can't even afford to pay attention.",
+  "content": "Yo mama is so poor, she
+    can't even afford to pay
+    attention.",
   "category": "Poor",
   "nsfw": false,
   "added_by": "John D.",
   "added_on": "2 days ago"
 }</code></pre>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <h6 class="gs-block-label">Headers</h6>
+                                <pre class="gs-code-block"><code>Content-Type: application/json</code></pre>
+                                <h6 class="gs-block-label mt-3">cURL Example</h6>
+                                <pre class="gs-code-block"><code>curl -X GET \
+  "http://localhost:8000/api/\
+insults/random/?nsfw=false" \
+  -H "Content-Type: \
+application/json"</code></pre>
+                            </div>
+                        </div>
 
-                <p id="additional-notes-text">
-                    In this example, you can specify the joke category and whether NSFW content is allowed. If no filters are provided, a random joke will be returned. Check out our comprehensive documentation for all available endpoints and parameters.
-                </p>
+                        <h5 class="gs-section-title mt-4">List All Jokes</h5>
+                        <div class="gs-endpoint-row">
+                            <span class="gs-method-badge gs-method-get">GET</span>
+                            <code class="gs-endpoint-code">/api/insults/</code>
+                        </div>
+                        <p class="text-muted mt-2">Returns a paginated list of all jokes. Supports the same <code>category</code> and <code>nsfw</code> query parameters.</p>
+                    </div>
+
+                    <!-- Tab 4: Quick Reference -->
+                    <div class="tab-pane fade" id="gs-reference" role="tabpanel" aria-labelledby="gs-reference-tab">
+                        <div class="gs-step-header-row">
+                            <span class="gs-step-number-lg">4</span>
+                            <div>
+                                <h4 class="mb-1">Quick Reference</h4>
+                                <p class="text-muted mb-0 fs-sm">All key endpoints at a glance.</p>
+                            </div>
+                        </div>
+
+                        <h5 class="gs-section-title mt-4">Endpoint Summary</h5>
+                        <div class="table-responsive">
+                            <table class="table gs-param-table">
+                                <thead>
+                                    <tr>
+                                        <th>Method</th>
+                                        <th>Endpoint</th>
+                                        <th>Auth</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><span class="gs-method-badge gs-method-get">GET</span></td>
+                                        <td><code>/api/insults/</code></td>
+                                        <td><span class="badge bg-secondary">None</span></td>
+                                        <td>List all jokes (paginated)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="gs-method-badge gs-method-get">GET</span></td>
+                                        <td><code>/api/insults/random/</code></td>
+                                        <td><span class="badge bg-secondary">None</span></td>
+                                        <td>Fetch a random joke</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="gs-method-badge gs-method-get">GET</span></td>
+                                        <td><code>/api/insults/{id}/</code></td>
+                                        <td><span class="badge bg-secondary">None</span></td>
+                                        <td>Get a specific joke by ID</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="gs-method-badge gs-method-post">POST</span></td>
+                                        <td><code>/api/insults/</code></td>
+                                        <td><span class="badge gs-badge-auth">Token</span></td>
+                                        <td>Submit a new joke</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="gs-method-badge gs-method-post">POST</span></td>
+                                        <td><code>/auth/users/</code></td>
+                                        <td><span class="badge bg-secondary">None</span></td>
+                                        <td>Register a new user</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="gs-method-badge gs-method-post">POST</span></td>
+                                        <td><code>/auth/token/login/</code></td>
+                                        <td><span class="badge bg-secondary">None</span></td>
+                                        <td>Obtain auth token</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="gs-method-badge gs-method-get">GET</span></td>
+                                        <td><code>/graphql</code></td>
+                                        <td><span class="badge bg-secondary">None</span></td>
+                                        <td>GraphQL playground &amp; endpoint</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h5 class="gs-section-title mt-4">Rate Limiting</h5>
+                        <div class="row g-3 mb-3">
+                            <div class="col-6 col-md-3">
+                                <div class="gs-rate-card">
+                                    <div class="gs-rate-number">100</div>
+                                    <div class="gs-rate-label">req/day<br><small>Anonymous</small></div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <div class="gs-rate-card gs-rate-card-auth">
+                                    <div class="gs-rate-number">1,000</div>
+                                    <div class="gs-rate-label">req/day<br><small>Authenticated</small></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h5 class="gs-section-title">Explore the Docs</h5>
+                        <div class="row g-3">
+                            <div class="col-12 col-md-4">
+                                <a href="http://localhost:8000/api/swagger/" target="_blank" class="gs-doc-link">
+                                    <img src="./assets/swagger_icon.png" alt="Swagger" class="gs-doc-img">
+                                    <span>Swagger UI</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square ms-1 fa-xs"></i>
+                                </a>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <a href="https://www.postman.com/terryabrooksjr/the-roast-api-yo-mama-jokes/overview"
+                                   target="_blank" class="gs-doc-link">
+                                    <img src="./assets/postman_logo.png" alt="Postman" class="gs-doc-img">
+                                    <span>Postman Collection</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square ms-1 fa-xs"></i>
+                                </a>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <a href="http://localhost:8000/graphql" target="_blank" class="gs-doc-link">
+                                    <img src="./assets/GraphQL_logo.png" alt="GraphQL" class="gs-doc-img">
+                                    <span>GraphQL Playground</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square ms-1 fa-xs"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!-- /tab-content -->
+            </div><!-- /modal-body -->
+
+            <!-- Footer with Prev / Next navigation -->
+            <div class="modal-footer gs-modal-footer">
+                <div class="gs-footer-nav">
+                    <button type="button" class="btn nav-bttn btn-danger" id="gs-prev-btn" disabled>
+                        <i class="fa-solid fa-backward me-1"></i> Previous
+                    </button>
+                    <button type="button" class="btn btn-info nav-bttn" data-bs-dismiss="modal">Exit</button>
+                    <button type="button" class="btn nav-bttn btn-success" id="gs-next-btn">
+                        Next <i class="fa-solid fa-forward ms-1"></i>
+                    </button>
+                </div>
+                <div class="gs-footer-links">
+                    <a href="http://localhost:8000/api/swagger/" class="btn gs-link-btn" target="_blank" rel="noopener">
+                        <img src="./assets/swagger_icon.png" alt="" class="gs-link-icon"> Swagger
+                    </a>
+                    <a href="https://www.postman.com/terryabrooksjr/the-roast-api-yo-mama-jokes/overview"
+                       class="btn gs-link-btn gs-link-btn-postman" target="_blank" rel="noopener">
+                        <img src="./assets/postman_logo.png" alt="" class="gs-link-icon"> Postman
+                    </a>
+                </div>
             </div>
-            <div class="modal-footer text-center">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <a href="http://localhost:8000/api/schema/swagger-ui/"
-                   class="btn btn-success" target="_blank">Check Out More In Swagger</a>
-                <a href="https://www.postman.com/terryabrooksjr/the-roast-api-yo-mama-jokes/overview"
-                   class="btn btn-success" target="_blank">Check Out More In Postman</a>
-            </div>
-        </div>
-    </div>
+
+        </div><!-- /modal-content -->
+    </div><!-- /modal-dialog -->
 </div>
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    // Initialize the modal trigger
-    const modalTrigger = document.getElementById("getting-started-modal-btn");
-    const modal = document.getElementById("getting-started-modal");
-
-    if (modalTrigger && modal) {
-        modalTrigger.addEventListener("click", function(e) {
-            e.preventDefault();
-            const bootstrapModal = new bootstrap.Modal(modal);
-            bootstrapModal.show();
-        });
-    }
-});
-</script>
 <!--End Getting Started Modal-->

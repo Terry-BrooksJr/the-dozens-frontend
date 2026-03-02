@@ -1,0 +1,31 @@
+# =============================================================================
+# docker-compose.yml - The Dozens Frontend
+#
+# Usage:
+#   docker compose up --build                   # Default API URL
+#   API_BASE_URL=https://api.example.com docker compose up --build
+# =============================================================================
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: the-dozens-frontend:latest
+    container_name: the-dozens-frontend
+    ports:
+      # Map host port 8080 to container port 80.
+      # Change to "80:80" if deploying directly on a server.
+      - "8080:80"
+    environment:
+      # Injected at container startup by docker-entrypoint.sh (no rebuild needed).
+      # Override: API_BASE_URL=https://api.thedozens.com docker compose up
+      - API_BASE_URL=${API_BASE_URL:-http://localhost:8000}
+    restart: unless-stopped
+    healthcheck:
+      # httpd:alpine ships with wget (busybox) but not curl
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s

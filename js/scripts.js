@@ -1233,7 +1233,7 @@ function initializeApp() {
   document.addEventListener('allModalsLoaded', () => {
     GettingStartedModal.initialize();
     console.log('[TheDozens] Modal partials initialized');
-  });
+  }, { once: true });
 
   // Auto-stop preloader after delay
   setTimeout(() => {

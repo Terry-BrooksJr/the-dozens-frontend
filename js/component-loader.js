@@ -91,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (error) {
             console.error('Error loading modal components:', error);
+            throw error;
         }
     };
 
@@ -99,6 +100,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // have been injected into the DOM and are safe to query/initialize.
         document.dispatchEvent(new CustomEvent('allModalsLoaded'));
         console.log('[ComponentLoader] All modal partials loaded — allModalsLoaded dispatched');
+    }).catch((error) => {
+        console.error('[ComponentLoader] Modal partials failed to load — allModalsLoaded will not fire:', error);
     });
 });
 

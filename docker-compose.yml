@@ -20,7 +20,7 @@ services:
     environment:
       # Injected at container startup by docker-entrypoint.sh (no rebuild needed).
       # Override: API_BASE_URL=https://api.thedozens.com docker compose up
-      - API_BASE_URL=${API_BASE_URL:-http://localhost:8000}
+      - API_BASE_URL=${API_BASE_URL:-http://api.yo-momma.io}
     restart: unless-stopped
     healthcheck:
       # httpd:alpine ships with wget (busybox) but not curl

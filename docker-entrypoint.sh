@@ -5,13 +5,13 @@
 # then starts Apache httpd in the foreground.
 #
 # Environment variables:
-#   API_BASE_URL  - The API base URL (default: http://localhost:8000)
+#   API_BASE_URL  - The API base URL (default: http://api.yo-momma.io)
 # =============================================================================
 
 set -e
 
 HTDOCS="/usr/local/apache2/htdocs"
-DEFAULT_URL="http://localhost:8000"
+DEFAULT_URL="http://api.yo-momma.io"
 
 # ---------------------------------------------------------------------------
 # Fail fast if API_BASE_URL is unset or empty.
@@ -31,8 +31,8 @@ echo "==> Injecting API_BASE_URL: ${API_BASE_URL}"
 
 # ---------------------------------------------------------------------------
 # index.html: 5 occurrences
-#   - meta tag:  <meta name="api-base-url" content="http://localhost:8000">
-#   - 4 nav links: href="http://localhost:8000/..."
+#   - meta tag:  <meta name="api-base-url" content="http://api.yo-momma.io">
+#   - 4 nav links: href="http://api.yo-momma.io/..."
 # ---------------------------------------------------------------------------
 sed -i "s@${DEFAULT_URL}@${ESCAPED_URL}@g" "${HTDOCS}/index.html"
 echo "    [OK] index.html"
@@ -51,7 +51,7 @@ echo "    [OK] 500.html"
 
 # ---------------------------------------------------------------------------
 # js/api-client.js: constructor default on line 7
-#   constructor(baseURL = 'http://localhost:8000')
+#   constructor(baseURL = 'http://api.yo-momma.io')
 # This is the primary runtime API URL for all fetch() calls in the app.
 # ---------------------------------------------------------------------------
 sed -i "s@${DEFAULT_URL}@${ESCAPED_URL}@g" "${HTDOCS}/js/api-client.js"

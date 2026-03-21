@@ -31,7 +31,7 @@ the-dozens-frontend/
 ### Prerequisites
 
 - Node.js 16+ (optional, for build tools)
-- The Dozens API running on `http://localhost:8000`
+- The Dozens API running on `http://api.yo-momma.io`
 
 ### Development Setup
 
@@ -58,7 +58,7 @@ the-dozens-frontend/
    ```
 
 4. **Access the site:**
-   Open `http://localhost:3000` in your browser
+   Open `http://yo-momma.io` in your browser
 
 ### Production Build
 
@@ -237,7 +237,7 @@ Ensure your Django API includes the frontend domain in CORS settings:
 # In Django settings.py
 CORS_ALLOWED_ORIGINS = [
     "https://your-frontend-domain.com",
-    "http://localhost:3000",  # Development
+    "http://yo-momma.io",  # Development
 ]
 ```
 
@@ -285,7 +285,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 🤝 Support
 
-- **Documentation:** [API Documentation](http://localhost:8000/api/schema/redoc/)
+- **Documentation:** [API Documentation](http://api.yo-momma.io/api/schema/redoc/)
 - **Issues:** [GitHub Issues](https://github.com/your-username/the-dozens-frontend/issues)
 - **Email:** terry@brooksjr.com
 

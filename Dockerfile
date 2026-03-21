@@ -57,7 +57,7 @@ COPY --from=builder /app/includes/   /usr/local/apache2/htdocs/includes/
 RUN chown -R www-app:www-app /usr/local/apache2/htdocs
 
 # Default runtime API base URL. Override via -e API_BASE_URL=... at container run.
-ENV API_BASE_URL=http://localhost:8000
+ENV API_BASE_URL=http://api.yo-momma.io
 
 EXPOSE 80
 

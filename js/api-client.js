@@ -4,7 +4,7 @@
  */
 
 class DozensAPIClient {
-    constructor(baseURL = 'http://localhost:8000') {
+    constructor(baseURL = 'https://api.yo-momma.io') {
         this.baseURL = baseURL;
         this.apiURL = `${baseURL}/api`;
     }
@@ -80,7 +80,7 @@ class DozensAPIClient {
      * Report a joke (submit issue to GitHub)
      */
     async reportJoke(data) {
-        const url = `${this.baseURL}/report-joke/`;
+        const url = `${this.baseURL}/report/`;
         return await this._fetch(url, {
             method: 'POST',
             body: JSON.stringify(data)

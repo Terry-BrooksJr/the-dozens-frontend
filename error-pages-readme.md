@@ -71,7 +71,7 @@ error_page 500 502 503 504 /500.html;
 ### API Configuration
 The API base URL can be configured via the meta tag:
 ```html
-<meta name="api-base-url" content="http://localhost:8000">
+<meta name="api-base-url" content="http://api.yo-momma.io">
 ```
 
 ### Joke Collections
@@ -92,9 +92,9 @@ To test the error pages:
 3. **403 Page**: Access restricted content (requires server configuration)
 
 For local testing, you can access the pages directly:
-- `http://localhost:3000/404.html`
-- `http://localhost:3000/500.html`
-- `http://localhost:3000/403.html`
+- `http://yo-momma.io/404.html`
+- `http://yo-momma.io/500.html`
+- `http://yo-momma.io/403.html`
 
 ## Browser Support
 

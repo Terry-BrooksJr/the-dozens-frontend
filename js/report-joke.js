@@ -20,51 +20,56 @@ document.addEventListener('allModalsLoaded', function () {
     // Set of valid reference_id strings fetched from the API.
     // null  → API not yet loaded (or failed); skip set-membership check.
     // Set   → API succeeded; submitted value MUST be a member.
-    let validReferenceIds = null;
 
     // -------------------------------------------------------------------------
     // Populate reference ID dropdown from API
     // -------------------------------------------------------------------------
-    async function loadReferenceIds() {
-        const select = document.getElementById('id_insult_reference_id');
-        if (!select) return;
+    let validReferenceIds = null;
+    let referenceIdsCache = [];
+    let autocompleteInitialized = false;
 
+    const getReferenceIds = async () => {
         try {
-            const response = await fetch('https://api.yo-momma.io/api/insults/reference-ids/');
+            const response = await fetch('https://api.yo-momma.io/insults/reference-ids/');
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             const data = await response.json();
-
-            const ids = Array.isArray(data) ? data : (data.results || []);
-            validReferenceIds = new Set();
-
-            select.innerHTML = '<option value="">Select a reference ID…</option>';
-            ids.forEach(item => {
-                if (item.reference_id) {
-                    validReferenceIds.add(item.reference_id);
-                    const option = document.createElement('option');
-                    option.value = item.reference_id;
-                    option.textContent = item.reference_id;
-                    select.appendChild(option);
-                }
-            });
+            return Array.isArray(data.reference_ids) ? data.reference_ids : [];
         } catch (error) {
             console.warn('[ReportJoke] Could not load reference IDs:', error);
-            select.innerHTML = '<option value="">Unable to load IDs — type manually</option>';
-            // Fall back to a plain text input so the user isn't blocked.
-            // validReferenceIds stays null → only a non-empty check is applied.
-            const input = document.createElement('input');
-            input.type = 'text';
-            input.name = 'insult_reference_id';
-            input.id = 'id_insult_reference_id';
-            input.className = 'form-control';
-            input.placeholder = 'e.g., GIGGLE_ABC123';
-            input.required = true;
-            select.replaceWith(input);
+            return [];
+        }
+    };
+
+    async function initializeReferenceIds() {
+        if (autocompleteInitialized) return;
+        try {
+            const ids = await getReferenceIds();   // ids is now an array of strings
+            validReferenceIds = new Set(ids);
+            referenceIdsCache = Array.isArray(ids) ? ids : [];
+
+            const autoCompleteInput = $('#id_insult_reference_id');
+            if (!autoCompleteInput.length) {
+                console.warn('[ReportJoke] Autocomplete input not found. Skipping autocomplete initialization.');
+                return;
+            }
+
+            autoCompleteInput.autocomplete({
+                source: function (request, response) {
+                    const term = request.term.toLowerCase();
+                    response(referenceIdsCache.filter(item => item.toLowerCase().includes(term)));
+
+                },
+                minLength: 1,
+                delay: 100,
+                appendTo: '#report-a-joke-modal'
+            });
+            console.log(`[ReportJoke] Autocomplete initialized with ${referenceIdsCache.length} reference IDs.`);
+            autocompleteInitialized = true;
+        } catch (error) {
+            console.warn('[ReportJoke] Failed to initialize autocomplete:', error);
         }
     }
-
-    loadReferenceIds();
-
+    $(document).on('shown.bs.modal', '#report-a-joke-modal', initializeReferenceIds);
     // -------------------------------------------------------------------------
     // Modal trigger
     // -------------------------------------------------------------------------
@@ -238,3 +243,7 @@ document.addEventListener('allModalsLoaded', function () {
         submitBtn.disabled = false;
     }
 });
+
+
+
+console.log('[ReportJoke] Report Joke Modal script loaded');

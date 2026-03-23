@@ -1,6 +1,6 @@
 <!-- Joke Reporting Modal -->
-<div class="modal fade" id="report-a-joke-modal" tabindex="-1" role="dialog"
-     aria-labelledby="reportJokeModalTitle" aria-hidden="true">
+<div class="modal fade" id="report-a-joke-modal" tabindex="-1" role="dialog" aria-labelledby="reportJokeModalTitle"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -11,17 +11,20 @@
                 <h3>Overview</h3>
                 <p>
                     The Dozen's API intends to serve as a humorous, joyful piece of African-American culture where, as a
-                    community, good-hearted jokes are shared and enjoyed. To this end, please submit a joke for review if you
+                    community, good-hearted jokes are shared and enjoyed. To this end, please submit a joke for review
+                    if you
                     feel its presence is a disservice to that end.
                 </p>
                 <h3>Review Process</h3>
                 <p>
-                    Depending on the reason for the review process, a contributor to the API will review the submitted joke
+                    Depending on the reason for the review process, a contributor to the API will review the submitted
+                    joke
                     within seven working days.
                 </p>
                 <br>
                 <p>
-                    In the event of any submission reason other than 'Inappropriate,' a single contributor will review the
+                    In the event of any submission reason other than 'Inappropriate,' a single contributor will review
+                    the
                     joke's content and comments provided in this submission and take appropriate action.
                     <strong>Appropriate actions include but are not limited to the following:</strong>
                 </p>
@@ -46,21 +49,12 @@
                             <label for="id_insult_reference_id" class="form-label">
                                 Insult Reference ID <span class="text-danger">*</span>
                             </label>
-                            <select name="insult_reference_id"
-                                    id="id_insult_reference_id"
-                                    class="form-select"
-                                    required>
-                                <option value="">Loading reference IDs…</option>
-                            </select>
-                            <div class="form-text">Select the reference ID of the joke to report.</div>
-                            <div class="invalid-feedback"></div>
+                            <input type="text" name="insult_reference_id" id="id_insult_reference_id"
+                                class="form-control" required autocomplete="off">
                         </div>
                         <div class="col-md-6 form-group mb-0">
                             <div class="form-check mt-4">
-                                <input type="checkbox"
-                                       name="anonymous"
-                                       id="id_anonymous"
-                                       class="form-check-input">
+                                <input type="checkbox" name="anonymous" id="id_anonymous" class="form-check-input">
                                 <label for="id_anonymous" class="form-check-label">
                                     Submit anonymously?
                                 </label>
@@ -76,12 +70,12 @@
                         </label>
                         <select name="review_type" id="id_review_type" class="form-select" required>
                             <option value="">Select a review type</option>
-                            <option value="inappropriate">Inappropriate Content</option>
-                            <option value="offensive">Offensive Language</option>
-                            <option value="miscategorized">Wrong Category</option>
-                            <option value="duplicate">Duplicate Content</option>
-                            <option value="quality">Quality Issues</option>
-                            <option value="other">Other</option>
+                            <option value="RX-M">Inappropriate Content/Offensive Language</option>
+                            <option value="RC">Wrong Category</option>
+                            <option value="RE">Wrong NSFW Classification</option>
+                            <option value="RX-D">Duplicate Content</option>
+                            <option value="RX-Q">Quality Issue</option>
+
                         </select>
                         <div class="invalid-feedback"></div>
                     </div>
@@ -92,10 +86,8 @@
                             <label for="id_reporter_first_name" class="form-label">
                                 First Name <span class="required-asterisk text-danger">*</span>
                             </label>
-                            <input type="text"
-                                   name="reporter_first_name"
-                                   id="id_reporter_first_name"
-                                   class="form-control">
+                            <input type="text" name="reporter_first_name" id="id_reporter_first_name"
+                                class="form-control">
                             <div class="form-text">Your first name (required unless anonymous)</div>
                             <div class="invalid-feedback"></div>
                         </div>
@@ -103,10 +95,8 @@
                             <label for="id_reporter_last_name" class="form-label">
                                 Last Name or Initial <span class="required-asterisk text-danger">*</span>
                             </label>
-                            <input type="text"
-                                   name="reporter_last_name"
-                                   id="id_reporter_last_name"
-                                   class="form-control">
+                            <input type="text" name="reporter_last_name" id="id_reporter_last_name"
+                                class="form-control">
                             <div class="form-text">Your last name or initial (required unless anonymous)</div>
                             <div class="invalid-feedback"></div>
                         </div>
@@ -116,10 +106,8 @@
                     <div class="row form-row mb-3">
                         <div class="col-md-6 form-group mb-0">
                             <div class="form-check">
-                                <input type="checkbox"
-                                       name="post_review_contact_desired"
-                                       id="id_post_review_contact_desired"
-                                       class="form-check-input">
+                                <input type="checkbox" name="post_review_contact_desired"
+                                    id="id_post_review_contact_desired" class="form-check-input">
                                 <label for="id_post_review_contact_desired" class="form-check-label">
                                     Do you want to be contacted with the review results?
                                 </label>
@@ -128,12 +116,10 @@
                         </div>
                         <div class="col-md-6 form-group mb-0">
                             <label for="id_reporter_email" class="form-label">
-                                Email Address <span class="email-required-asterisk text-danger" style="display: none;">*</span>
+                                Email Address <span class="email-required-asterisk text-danger"
+                                    style="display: none;">*</span>
                             </label>
-                            <input type="email"
-                                   name="reporter_email"
-                                   id="id_reporter_email"
-                                   class="form-control">
+                            <input type="email" name="reporter_email" id="id_reporter_email" class="form-control">
                             <div class="form-text">Your email address (required if you want to be contacted)</div>
                             <div class="invalid-feedback"></div>
                         </div>
@@ -145,12 +131,9 @@
                             <label for="id_rationale_for_review" class="form-label">
                                 Reason for Review
                             </label>
-                            <textarea name="rationale_for_review"
-                                      id="id_rationale_for_review"
-                                      class="form-control"
-                                      rows="4"
-                                      minlength="70"
-                                      placeholder="Please provide a detailed explanation for why this joke should be reviewed (minimum 70 characters)"></textarea>
+                            <textarea name="rationale_for_review" id="id_rationale_for_review" class="form-control"
+                                rows="4" minlength="70"
+                                placeholder="Please provide a detailed explanation for why this joke should be reviewed (minimum 70 characters)"></textarea>
                             <div class="form-text">
                                 Provide a basis for review of the insult (minimum 70 characters)
                             </div>
@@ -178,49 +161,49 @@
 </div>
 
 <style>
-/* Additional styles for the form */
-.form-check-input:checked {
-    background-color: var(--color-primary);
-    border-color: var(--color-primary);
-}
+    /* Additional styles for the form */
+    .form-check-input:checked {
+        background-color: var(--color-primary);
+        border-color: var(--color-primary);
+    }
 
-.form-control:focus,
-.form-select:focus {
-    border-color: var(--color-accent);
-    box-shadow: 0 0 0 0.2rem rgba(190, 218, 0, 0.25);
-}
+    .form-control:focus,
+    .form-select:focus {
+        border-color: var(--color-accent);
+        box-shadow: 0 0 0 0.2rem rgba(190, 218, 0, 0.25);
+    }
 
-.btn-success {
-    background-color: var(--color-accent);
-    border-color: var(--color-accent);
-    color: #000;
-}
+    .btn-success {
+        background-color: var(--color-accent);
+        border-color: var(--color-accent);
+        color: #000;
+    }
 
-.btn-success:hover {
-    background-color: #a5c000;
-    border-color: #a5c000;
-}
+    .btn-success:hover {
+        background-color: #a5c000;
+        border-color: #a5c000;
+    }
 
-.character-count {
-    font-size: 0.875rem;
-    text-align: right;
-}
+    .character-count {
+        font-size: 0.875rem;
+        text-align: right;
+    }
 
-.alert-container .alert {
-    margin-bottom: 0;
-}
+    .alert-container .alert {
+        margin-bottom: 0;
+    }
 
-.modal-footer {
-    justify-content: flex-end;
-    gap: 0.5rem;
-}
+    .modal-footer {
+        justify-content: flex-end;
+        gap: 0.5rem;
+    }
 
-.text-muted input {
-    opacity: 0.6;
-}
+    .text-muted input {
+        opacity: 0.6;
+    }
 
-.required-asterisk,
-.email-required-asterisk {
-    font-weight: bold;
-}
+    .required-asterisk,
+    .email-required-asterisk {
+        font-weight: bold;
+    }
 </style>

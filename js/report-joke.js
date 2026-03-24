@@ -158,22 +158,42 @@ document.addEventListener('allModalsLoaded', function () {
         try {
             const response = await window.dozensAPI.reportJoke(data);
 
-            if (response.status === 'OK') {
-                showAlert('success', 'Your joke report has been submitted successfully! We will review it within 7 business days.');
+            if (response.status === 'SUCCESS') {
+                const githubUrl = response.github_url;
+                resetSubmitButton();
                 form.reset();
                 charCount.textContent = '0';
                 charCount.style.color = '';
-                setTimeout(() => {
-                    const modalInstance = bootstrap.Modal.getInstance(modal);
-                    if (modalInstance) modalInstance.hide();
-                }, 2000);
+                const modalInstance = bootstrap.Modal.getInstance(modal);
+                modal.addEventListener('hidden.bs.modal', function onHidden() {
+                    modal.removeEventListener('hidden.bs.modal', onHidden);
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Report Submitted!',
+                        html: `Your joke report has been submitted successfully.<br><br>
+                               Track the status of your report:<br>
+                               <a href="${githubUrl}" target="_blank" rel="noopener">${githubUrl}</a>`,
+                        confirmButtonText: 'Got it',
+                        confirmButtonColor: '#770071'
+                    }).then(() => {
+                        document.body.classList.remove('modal-open');
+                        document.body.style.overflow = '';
+                        document.body.style.paddingRight = '';
+                        document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+                    });
+                }, { once: true });
+                if (modalInstance) modalInstance.hide();
             } else {
                 throw new Error('Unexpected response status');
             }
         } catch (error) {
             console.error('[ReportJoke] Submission error:', error);
-            showAlert('error', 'Failed to submit your report. Please try again later.');
-        } finally {
+            Swal.fire({
+                icon: 'error',
+                title: 'Submission Failed',
+                text: 'Failed to submit your report. Please try again later.',
+                confirmButtonColor: '#770071'
+            });
             resetSubmitButton();
         }
     });

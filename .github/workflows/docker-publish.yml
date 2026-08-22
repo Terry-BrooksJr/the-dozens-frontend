@@ -3,9 +3,9 @@ name: Build and Push Docker Image
 on:
   push:
     branches:
-      - master
+      - main
   workflow_call:
-    
+
 env:
   IMAGE_NAME: TerryBrooks/dozens-frontend
 

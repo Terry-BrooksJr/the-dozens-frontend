@@ -7,7 +7,7 @@ on:
   workflow_call:
 
 env:
-  IMAGE_NAME: TerryBrooks/dozens-frontend
+  IMAGE_NAME: terrybrooks/dozens-frontend
 
 jobs:
   build-and-push:
